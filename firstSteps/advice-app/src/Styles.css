@@ -1,0 +1,13 @@
+body{
+    background-color: black;
+    color: whitesmoke;
+    font-size: 180%;
+    text-align: center;
+}
+button{
+    font-size: 150%;
+    background-color: rgb(20, 126, 197);
+    border-radius: 7px;
+    border: 2px solid rgb(71, 68, 59);
+    padding: 20px;
+}
