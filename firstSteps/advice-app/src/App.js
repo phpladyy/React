@@ -29,8 +29,11 @@ function App() {
         <h2> 
          {`Joke: ${joke?.setup ?? joke?.joke ?? ""} ${joke?.delivery ?? ""}`}
         </h2>
-        <Counter adviceCount = {adviceCounter} jokeCount = {jokeCounter} />
+        <Counter adviceCount = {adviceCounter} jokeCount = {jokeCounter}/>
+        
     </div>
+  
+    
   );
 }
 
