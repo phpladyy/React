@@ -49,27 +49,50 @@ const pizzaData = [
 
 function App() {
   return (
-      <div className="container">
-        <Header />
-        <Menu />
-        <Footer />
-      </div>
+    <div className="container">
+      <Header />
+      <Menu />
+      <Footer />
+    </div>
   );
 }
 
 const Header = () => (
   <header className="header">
-  <h1>
-    Pizza menu
-  </h1>
+    <h1>Foxiee's Pizza menu</h1>
   </header>
 );
 
+const inflation = 6;
+function Pizza(props) {
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name} />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price + inflation}zł</span>
+      </div>
+    </div>
+  );
+}
+
 const Menu = () => (
-  <>
+  <main className="menu">
     <h2>Our menu</h2>
-    <Pizza />
-  </>
+    <Pizza
+      name="Pizza Prosciutto"
+      ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
+      price={18}
+      photoName="pizzas/prosciutto.jpg"
+    />
+    <Pizza
+      name="Pizza salami"
+      ingredients="Tomato, mozarella, salami"
+      price={28}
+      photoName="pizzas/salamino.jpg"
+    />
+  </main>
 );
 
 function Footer() {
@@ -78,24 +101,13 @@ function Footer() {
   const closeHour = 21;
   const isOpen = hour >= openHour && hour < closeHour;
   return (
-    <footer>
+    <footer className="footer">
       {new Date().toLocaleTimeString("pl", {
         timeStyle: "short",
         hour12: false,
       })}
       . The restaurant is currently <b>{isOpen ? "open" : "closed"}</b>
     </footer>
-  );
-}
-
-function Pizza() {
-  const d = 3;
-  return (
-    <>
-      <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
-      <h2>Pizza Spinaci </h2>
-      <h2>Tomato, mozarella, spinach, and ricotta cheese</h2>
-    </>
   );
 }
 
