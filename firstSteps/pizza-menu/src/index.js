@@ -1,6 +1,6 @@
-import { findAllByAltText } from "@testing-library/dom";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -47,25 +47,27 @@ const pizzaData = [
   },
 ];
 
-const x = "jo";
 function App() {
   return (
-    <>
-      <Header />
-      <Menu />
-      <Footer />
-    </>
+      <div className="container">
+        <Header />
+        <Menu />
+        <Footer />
+      </div>
   );
 }
 
-const Header = () => <h1>Pizza menu</h1>;
+const Header = () => (
+  <header className="header">
+  <h1>
+    Pizza menu
+  </h1>
+  </header>
+);
 
 const Menu = () => (
   <>
     <h2>Our menu</h2>
-    <Pizza />
-    <Pizza />
-    <Pizza />
     <Pizza />
   </>
 );
@@ -74,14 +76,14 @@ function Footer() {
   const hour = new Date().getHours();
   const openHour = 15;
   const closeHour = 21;
+  const isOpen = hour >= openHour && hour < closeHour;
   return (
     <footer>
       {new Date().toLocaleTimeString("pl", {
         timeStyle: "short",
         hour12: false,
       })}
-      . The restaurant is currently{" "}
-      {hour >= openHour && hour < closeHour ? "open" : "closed"}
+      . The restaurant is currently <b>{isOpen ? "open" : "closed"}</b>
     </footer>
   );
 }
