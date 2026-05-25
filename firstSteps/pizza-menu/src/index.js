@@ -1,3 +1,4 @@
+import { findAllByAltText } from "@testing-library/dom";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
@@ -50,21 +51,36 @@ const x = "jo";
 function App() {
   return (
     <>
-      <h2></h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <Header />
+      <Menu />
+      <Footer />
     </>
   );
 }
 
+const Header = () => <h1>Pizza menu</h1>;
+
+const Menu = () => (
+  <>
+    <h2>Our menu</h2>
+    <Pizza />
+  </>
+);
+
+const Footer = () => (
+  <footer>
+    {new Date().toLocaleTimeString("pl", { timeStyle: "short", hour12: false })}
+    . We are currently open
+  </footer>
+);
+
 function Pizza() {
   return (
     <>
-    <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
+      <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
       <h2>Pizza Spinaci</h2>
       <h2>Tomato, mozarella, spinach, and ricotta cheese</h2>
-    </> 
+    </>
   );
 }
 
