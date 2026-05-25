@@ -64,21 +64,34 @@ const Menu = () => (
   <>
     <h2>Our menu</h2>
     <Pizza />
+    <Pizza />
+    <Pizza />
+    <Pizza />
   </>
 );
 
-const Footer = () => (
-  <footer>
-    {new Date().toLocaleTimeString("pl", { timeStyle: "short", hour12: false })}
-    . We are currently open
-  </footer>
-);
+function Footer() {
+  const hour = new Date().getHours();
+  const openHour = 15;
+  const closeHour = 21;
+  return (
+    <footer>
+      {new Date().toLocaleTimeString("pl", {
+        timeStyle: "short",
+        hour12: false,
+      })}
+      . The restaurant is currently{" "}
+      {hour >= openHour && hour < closeHour ? "open" : "closed"}
+    </footer>
+  );
+}
 
 function Pizza() {
+  const d = 3;
   return (
     <>
       <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
-      <h2>Pizza Spinaci</h2>
+      <h2>Pizza Spinaci </h2>
       <h2>Tomato, mozarella, spinach, and ricotta cheese</h2>
     </>
   );
