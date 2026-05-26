@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
@@ -66,40 +66,48 @@ const Header = () => (
 function Pizza(props) {
   const inflation = 8;
   return (
-    <div className="pizza" key={props.pizzaObj.name}>
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
-      <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price+inflation}zł</span>
-      </div>
-    </div>
+    props.pizzaObj.soldOut || (
+      <li className="pizza">
+        <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+        <div>
+          <h3>{props.pizzaObj.name}</h3>
+          <p>{props.pizzaObj.ingredients}</p>
+          <span>{props.pizzaObj.price + inflation}zł</span>
+        </div>
+      </li>
+    )
   );
 }
 
-const Menu = (props) => (
+const Menu = () => (
   <main className="menu">
     <h2>Our menu</h2>
-    <div>
+    {(pizzaData.length>0 && 
+    <ul className="pizzas">
       {pizzaData.map((pizza) => (
-        <Pizza pizzaObj={pizza}></Pizza>
+        <Pizza pizzaObj={pizza} key={pizza.name}></Pizza>
       ))}
-    </div>
+    </ul>) || <h1>We don't have anything in menu yet</h1>}
   </main>
 );
 
 function Footer() {
-  const hour = new Date().getHours();
-  const openHour = 15;
-  const closeHour = 21;
-  const isOpen = hour >= openHour && hour < closeHour;
+  const currentHour = new Date().getHours();
+  const openHour = 14;
+  const closeHour = 23;
+  const isOpen = currentHour >= openHour && currentHour < closeHour;
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString("pl", {
-        timeStyle: "short",
-        hour12: false,
-      })}
-      . The restaurant is currently <b>{isOpen ? "open" : "closed"}</b>
+      {(isOpen && (
+        <div className="order">
+          {new Date().toLocaleTimeString("pl", {
+            timeStyle: "short",
+            hour12: false,
+          })}
+          <p>The restaurant is currently open until {closeHour}:00</p>
+          <button className="btn">Order</button>
+        </div>
+      )) || <p>We are closed till {openHour}:00</p>}
     </footer>
   );
 }
