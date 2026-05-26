@@ -64,34 +64,27 @@ const Header = () => (
 );
 
 function Pizza(props) {
-  const inflation = 6;
+  const inflation = 8;
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
+    <div className="pizza" key={props.pizzaObj.name}>
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price + inflation}zł</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price+inflation}zł</span>
       </div>
     </div>
   );
 }
 
-const Menu = () => (
+const Menu = (props) => (
   <main className="menu">
     <h2>Our menu</h2>
-    <Pizza
-      name="Pizza Prosciutto"
-      ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
-      price={18}
-      photoName="pizzas/prosciutto.jpg"
-    />
-    <Pizza
-      name="Pizza salami"
-      ingredients="Tomato, mozarella, salami"
-      price={28}
-      photoName="pizzas/salamino.jpg"
-    />
+    <div>
+      {pizzaData.map((pizza) => (
+        <Pizza pizzaObj={pizza}></Pizza>
+      ))}
+    </div>
   </main>
 );
 
