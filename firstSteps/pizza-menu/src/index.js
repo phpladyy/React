@@ -63,8 +63,8 @@ const Header = () => (
   </header>
 );
 
-const inflation = 6;
 function Pizza(props) {
+  const inflation = 6;
   return (
     <div className="pizza">
       <img src={props.photoName} alt={props.name} />
