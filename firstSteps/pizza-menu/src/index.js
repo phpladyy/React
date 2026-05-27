@@ -63,18 +63,17 @@ const Header = () => (
   </header>
 );
 
-function Pizza(props) {
+function Pizza({ pizzaObj }) {
   const inflation = 8;
-  if (props.pizzaObj.soldOut) {
-    return null;
-  }
   return (
-    <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+    <li className={pizzaObj.soldOut ? "pizza sold-out" : "pizza"}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price + inflation}zł</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>
+          {pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price + inflation + "zł"}
+        </span>
       </div>
     </li>
   );
@@ -84,11 +83,14 @@ const Menu = () => (
   <main className="menu">
     <h2>Our menu</h2>
     {pizzaData.length > 0 ? (
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name}></Pizza>
-        ))}
-      </ul>
+      <>
+        <p>6 creative Italian dishes to choose from. All from stove oven</p>
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name}></Pizza>
+          ))}
+        </ul>
+      </>
     ) : (
       <h1>We're working on the menu. Please come back later</h1>
     )}
@@ -104,18 +106,26 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          {new Date().toLocaleTimeString("pl", {
-            timeStyle: "short",
-            hour12: false,
-          })}
-          <p>The restaurant is currently open until {closeHour}:00</p>
-          <button className="btn">Order</button>
-        </div>
+        <Order closeHour={closeHour} openingHour={openHour} />
       ) : (
         <p>We are closed till {openHour}:00</p>
       )}
     </footer>
+  );
+}
+
+function Order({ closeHour, openingHour }) {
+  return (
+    <div className="order">
+      {new Date().toLocaleTimeString("pl", {
+        timeStyle: "short",
+        hour12: false,
+      })}
+      <p>
+        The restaurant is currently open from {openingHour}:00 to {closeHour}:00
+      </p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
 
