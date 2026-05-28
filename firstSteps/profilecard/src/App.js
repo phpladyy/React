@@ -45,5 +45,4 @@ const Skill = (props) => (
 );
 
 
-
 export default App;
