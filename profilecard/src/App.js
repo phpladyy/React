@@ -27,8 +27,7 @@ const skillsList = [
 
 const Skill = ({ color, level, skillName }) => (
   <span className="skill" style={{ backgroundColor: color }}>
-    {skillName}{" "}
-    {level === "advanced" && "💙"}
+    {skillName} {level === "advanced" && "💙"}
     {level === "intermediate" && "👌"}
     {level === "begginer" && "👶"}
   </span>
