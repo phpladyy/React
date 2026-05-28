@@ -15,6 +15,38 @@ function App() {
   );
 }
 
+const skillsList = [
+  { skillName: "JavaScript", bgColor: "#221e5044", level: "advanced" },
+  { skillName: "React", bgColor: "lightblue", level: "advanced" },
+  { skillName: "Git and Github", bgColor: "orange", level: "intermediate" },
+  { skillName: "HTML+CSS", bgColor: "yellow", level: "advanced" },
+  { skillName: "Java", bgColor: "#f750f7ea", level: "advanced" },
+  { skillName: "PHP", bgColor: "#f5690c", level: "intermediate" },
+  { skillName: "Python", bgColor: "#22ad2e", level: "begginer" },
+];
+
+const Skill = ({ color, level, skillName }) => (
+  <span className="skill" style={{ backgroundColor: color }}>
+    {skillName}{" "}
+    {level === "advanced" && "💙"}
+    {level === "intermediate" && "👌"}
+    {level === "begginer" && "👶"}
+  </span>
+);
+
+const SkillList = () => (
+  <div className="skill-list">
+    {skillsList.map((skill) => (
+      <Skill
+        key={skill.skillName}
+        skillName={skill.skillName}
+        color={skill.bgColor}
+        level={skill.level}
+      />
+    ))}
+  </div>
+);
+
 const Avatar = () => <img src={image} alt="" className="avatar" />;
 const Intro = () => (
   <div>
@@ -25,24 +57,5 @@ const Intro = () => (
     </p>
   </div>
 );
-
-const SkillList = (props) => (
-  <div className="skill-list">
-    <Skill bgColor="orangered" skillName="JavaScript" emoji="💚"></Skill>
-    <Skill bgColor="green" skillName="React" emoji="💙"></Skill>
-    <Skill bgColor="gray" skillName="Git and Github"></Skill>
-    <Skill bgColor="lightblue" skillName="HTML+CSS"></Skill>
-    <Skill bgColor="yellow" skillName="Java" emoji="💛"></Skill>
-    <Skill bgColor="pink" skillName="PHP"></Skill>
-  </div>
-);
-
-const Skill = (props) => (
-  <span className="skill" style={{ backgroundColor: props.bgColor }}>
-    {" "}
-    {props.skillName} {props.emoji ? props.emoji : "👌"}
-  </span>
-);
-
 
 export default App;
