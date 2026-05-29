@@ -6,7 +6,13 @@ const messages = [
   "Invest your new income 🤑",
 ];
 
-export default function App() {
+export default function App(){
+  return(
+      <Steps/>
+  )
+}
+
+function Steps() {
   const [step, setStep] = useState(1);
   const [test, setTest] = useState({ text: "Click next to see more pages" });
   const [isclosed, setClosing] = useState(false);
