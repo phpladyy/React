@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./index.css";
 
 const initialItems = [
@@ -22,10 +23,38 @@ function Logo() {
 }
 
 function Form() {
+  const [description, setDescription] = useState("test");
+  const [quantity, setQuantity] = useState(1);
+
+  function submitHandler(e) {
+    e.preventDefault();
+    if (!description) return;
+    const newItem = { id: Date.now(), description, quantity, packed: false };
+    console.log(newItem);
+    setDescription("");
+    setQuantity(1);
+  }
   return (
-    <div className="add-form">
+    <form onSubmit={submitHandler} className="add-form">
       <h3>What do ya need for yo trip buzz?</h3>
-    </div>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option key={num} value={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input
+        type="text"
+        placeholder="Item..."
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <button>Add</button>
+    </form>
   );
 }
 
@@ -34,7 +63,7 @@ function PackingList() {
     <div className="list">
       <ul>
         {initialItems.map((item) => (
-          <Item item={item} />
+          <Item key={item.id} item={item} />
         ))}
       </ul>
     </div>
@@ -44,7 +73,7 @@ function PackingList() {
 function Item({ item }) {
   return (
     <li>
-      <span style={{textDecoration: item.packed ? 'line-through':''}}>
+      <span style={{ textDecoration: item.packed ? "line-through" : "" }}>
         {item.quantity} {item.description}
       </span>
       <button>❌</button>
@@ -55,7 +84,7 @@ function Item({ item }) {
 function Stats() {
   return (
     <footer className="stats">
-      <em>You have x items on your list, and you already packed X$ (x)</em>
+      <em>You have x items on your list, and you already packed X (x)</em>
     </footer>
   );
 }
