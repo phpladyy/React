@@ -10,10 +10,77 @@ button {
     border-radius: 10px;
     margin: 5px;
     border: none;
-    background-color: antiquewhite;
+    background-color: rgb(223, 214, 202);
   padding: 5px 20px 5px 20px;
   font-size: 60px;
 }
 .controls {
     padding: 5px;
 }
+
+.reset{
+  background-color: rgb(170, 14, 53);
+  width: auto;
+}
+
+.textInput{
+  background-color: rgb(245, 229, 210);
+  border: 2px solid rgb(104, 0, 201);
+  font-size: 49px;
+  width: 140px;
+}
+
+
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type="range"] {
+   -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 15rem;
+    height: 40px;
+}
+
+
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+   background-color: #053a5f;
+   border-radius: 0.5rem;
+   height: 1rem;  
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   margin-top: -6px; /* Centers thumb on the track */
+   /*custom styles*/
+   background-color: #5cd5eb;
+   height: 2rem;
+   border-radius: 100%;
+   padding: 16px;
+   width: 1rem;
+}
+
+/******** Firefox styles ********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+   background-color: #053a5f;
+   border-radius: 0.5rem;
+   height: 1rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+   border: none; /*Removes extra border that FF applies*/
+   border-radius: 0; /*Removes default border-radius that FF applies*/
+
+   /*custom styles*/
+   background-color: #5cd5eb;
+   height: 2rem;
+   width: 1rem;
+}
+
