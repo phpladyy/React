@@ -1,35 +1,33 @@
 import { useState } from "react";
 import "./index.css";
 
-const initialItems = [
-  { id: 1, description: "Passports", quantity: 2, packed: false },
-  { id: 2, description: "Socks", quantity: 12, packed: true },
-  { id: 3, description: "Charger", quantity: 1, packed: false },
-];
+
 
 function App() {
-  const [items, setItems] = useState(initialItems);
+  const [items, setItems] = useState([]);
 
   function handleAddItems(item) {
     setItems((items) => [...items, item]);
+  }
+
+  function handleDeleteItem(id) {
+    setItems((item) => item.filter((item) => item.id !== id));
   }
 
   return (
     <div className="app">
       <Logo />
       <Form onAddItems={handleAddItems} />
-      <PackingList items={items} />
+      <PackingList items={items} onDeleteItem={handleDeleteItem} />
       <Stats />
     </div>
   );
 }
 
-function Logo() {
-  return <h1>🌴 Far Away 🧳</h1>;
-}
+const Logo = () => <h1>🌴 Far Away 🧳</h1>;
 
 function Form({ onAddItems }) {
-  const [description, setDescription] = useState("test");
+  const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   function submitHandler(e) {
@@ -40,9 +38,10 @@ function Form({ onAddItems }) {
     setDescription("");
     setQuantity(1);
   }
+
   return (
     <form onSubmit={submitHandler} className="add-form">
-      <h3>Add items to your packing listL</h3>
+      <h3>Add items to your packing list</h3>
       <select
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
@@ -64,25 +63,25 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items }) {
+function PackingList({ items, onDeleteItem }) {
   return (
     <div className="list">
       <ul>
         {items.map((item) => (
-          <Item key={item.id} item={item} />
+          <Item onDeleteItem={onDeleteItem} key={item.id} item={item} />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ item }) {
+function Item({ item, onDeleteItem }) {
   return (
     <li>
       <span style={{ textDecoration: item.packed ? "line-through" : "" }}>
         {item.quantity} {item.description}
       </span>
-      <button>❌</button>
+      <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
   );
 }
