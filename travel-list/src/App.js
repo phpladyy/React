@@ -4,6 +4,14 @@ import "./index.css";
 function App() {
   const [items, setItems] = useState([]);
 
+  function handleClearItems(){
+  const confirmMessage = window.confirm("You sure you wanna delete all items?");;
+  confirmMessage && setItems([]);
+}
+
+
+
+
   function handleAddItems(item) {
     setItems((items) => [...items, item]);
   }
@@ -28,6 +36,7 @@ function App() {
         items={items}
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
+        onClearItems={handleClearItems}
       />
       <Stats items={items} />
     </div>
@@ -73,7 +82,7 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items, onDeleteItem, onToggleItem }) {
+function PackingList({ items, onDeleteItem, onToggleItem,onClearItems }) {
   const [sortBy, setSortBy] = useState('input');
 
   let sortedItems;
@@ -106,6 +115,7 @@ else{
           <option value="description">Sort by description</option>
           <option value="packed">Sort by packed status</option>
         </select>
+        <button onClick={onClearItems}>Clear list</button>
       </div>
     </div>
   );
