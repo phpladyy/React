@@ -6,10 +6,8 @@ const messages = [
   "Invest your new income 🤑",
 ];
 
-export default function App(){
-  return(
-      <Steps/>
-  )
+export default function App() {
+  return <Steps />;
 }
 
 function Steps() {
@@ -30,7 +28,7 @@ function Steps() {
 
   return (
     <>
-      <button className="close" onClick={() => setClosing(closed => !closed)}>
+      <button className="close" onClick={() => setClosing((closed) => !closed)}>
         &times;
       </button>
       {isclosed || (
@@ -46,22 +44,32 @@ function Steps() {
             <br />
             {test.text}
           </p>
+
           <div className="buttons">
-            <button
+            <Button
+              textCol="white"
+              bgColor="#8e6cf3"
               onClick={handlePreviousClick}
-              style={{ backgroundColor: "purple", color: "white" }}
             >
-              Previous
-            </button>
-            <button
-              onClick={handleNextClick}
-              style={{ backgroundColor: "purple", color: "white" }}
-            >
-              Next
-            </button>
+              <span>👈</span> Previous
+            </Button>
+            <Button textCol="white" bgColor="#8e6cf3" onClick={handleNextClick}>
+              Next <span>👉</span>
+            </Button>
           </div>
         </div>
       )}
     </>
+  );
+}
+
+function Button({ textCol, bgColor, onClick, children }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{ color: textCol, backgroundColor: bgColor }}
+    >
+      {children}
+    </button>
   );
 }
