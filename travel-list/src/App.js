@@ -76,26 +76,15 @@ function Form({ onAddItems }) {
 function PackingList({ items, onDeleteItem, onToggleItem }) {
   const [sortBy, setSortBy] = useState('input');
 
-  let sortedItems=[...items];
+  let sortedItems;
   if (sortBy==='input') {
     sortedItems=items;
   }
   else if (sortBy==='description') {
-sortedItems=[...items];
-    sortedItems.sort((a,b) => {
-    const nameA = a.description.toUpperCase(); // ignore upper and lowercase
-    const nameB = b.description.toUpperCase(); // ignore upper and lowercase
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
-  });
+sortedItems=items.slice().sort((a, b) => a.description.localeCompare(b.description));
 }
 else{
-  sortedItems.sort((a, b) =>  b.packed -a.packed);
+  sortedItems= items.slice().sort((a, b) =>  Number(a.packed)-Number(b.packed));
 }
 
   return (
