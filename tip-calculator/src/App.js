@@ -1,24 +1,27 @@
 import { Children, useState } from "react";
 
 function App() {
-  const [firstOption, setFirstOption] = useState(0);
-  const [secondOption, setSecondOption] = useState(0);
+  return <BillCalculator />;
+}
+function BillCalculator() {
   const [bill, setBill] = useState(0);
-  const tip = (bill * ((firstOption + secondOption) / 2)) / 100;
+  const [firstRating, setFirstRating] = useState(0);
+  const [secondRating, setSecondRating] = useState(0);
+  const tip = (bill * ((firstRating + secondRating) / 2)) / 100;
 
   function resetAll() {
-    setFirstOption(0);
-    setSecondOption(0);
+    setFirstRating(0);
+    setSecondRating(0);
     setBill(0);
   }
 
   return (
-    <div>
+    <div className="questions">
       <BillAmount bill={bill} setBill={setBill} />
-      <ServiceRating option={firstOption} setOption={setFirstOption}>
+      <ServiceRating option={firstRating} setOption={setFirstRating}>
         How did you like it?
       </ServiceRating>
-      <ServiceRating option={secondOption} setOption={setSecondOption}>
+      <ServiceRating option={secondRating} setOption={setSecondRating}>
         How did your friend like it?
       </ServiceRating>
       {bill !== 0 && (
@@ -31,22 +34,17 @@ function App() {
   );
 }
 
-function BillDisplay({ bill, tip }) {
-  return (
-    <h2>
-      you pay {Number(bill) + tip}$ ({bill}$ + {tip}$ tip)
-    </h2>
-  );
-}
-
 function BillAmount({ bill, setBill }) {
   return (
     <>
-      <p>How much was the bill?</p>
+      <label>How much was the bill?</label>
       <input
+        placeholder="Bill value"
         type="text"
         value={bill !== 0 ? bill : ""}
-        onChange={(e) => setBill(Number(e.target.value))}
+        onChange={(e) =>
+          !isNaN(e.target.value) && setBill(Number(e.target.value))
+        }
       />
     </>
   );
@@ -65,7 +63,7 @@ function Question({ children, setOption, option }) {
   }
   return (
     <>
-      <p>{children}</p>
+      <label>{children}</label>
       <select value={option} onChange={handleChange}>
         <option value="0">Dissatisfied (0%)</option>
         <option value="5">It was okay (5%)</option>
@@ -75,6 +73,12 @@ function Question({ children, setOption, option }) {
     </>
   );
 }
+
+const BillDisplay = ({ bill, tip }) => (
+  <h3>
+    you pay {Number(bill) + tip}$ ({bill}$ + {tip}$ tip)
+  </h3>
+);
 
 function ResetButton({ chandleReset }) {
   return <button onClick={chandleReset}>Reset</button>;
