@@ -3,7 +3,7 @@ import "./App.css";
 import { evaluate } from "mathjs";
 
 function App() {
-  const [firstNumber, setFirstNumber] = useState("");
+  const [firstNumber, setEquation] = useState("");
   const result = (() => {
     try {
       return evaluate(firstNumber);
@@ -14,16 +14,18 @@ function App() {
 
   return (
     <div className="App">
-      <header>Numbers calculator</header>
-      <NumbersInput setFirstNumber={setFirstNumber} firstNumber={firstNumber} />
+      <Header/>
+      <NumbersInput setEquation={setEquation} firstNumber={firstNumber} />
       <Operation firstNumber={firstNumber} result={result} />
     </div>
   );
 }
 
-function NumbersInput({ firstNumber, setFirstNumber }) {
+const Header = () => <header>Number calculator by foxiee3</header>
+
+function NumbersInput({ firstNumber, setEquation }) {
   function inputChandler(num, settter) {
-    settter((arg) => "" + arg + num);
+    settter((arg) => arg + num);
     console.log(Number(firstNumber));
   }
   return (
@@ -31,32 +33,43 @@ function NumbersInput({ firstNumber, setFirstNumber }) {
       {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
         <span
           className="number"
-          onClick={(e) => inputChandler(num, setFirstNumber)}
+          onClick={(e) => inputChandler(num, setEquation)}
         >
           {num}
         </span>
       ))}
       <span
         className="number"
-        onClick={(e) => inputChandler(0, setFirstNumber)}
+        onClick={(e) => inputChandler(0, setEquation)}
       >
         0
       </span>
       <span
         className="number"
-        onClick={(e) => inputChandler("+", setFirstNumber)}
+        onClick={(e) => inputChandler("+", setEquation)}
       >
         +
       </span>
       <span
         className="number"
-        onClick={(e) => inputChandler("-", setFirstNumber)}
+        onClick={(e) => inputChandler("-", setEquation)}
       >
         -
       </span>
-      
+      <span
+        className="number"
+        onClick={(e) => inputChandler("*", setEquation)}
+      >
+        *
+      </span>
+      <span
+        className="number"
+        onClick={(e) => inputChandler("/", setEquation)}
+      >
+        :
+      </span>
 
-      <span className="number" onClick={() => setFirstNumber("")}>
+      <span className="number" onClick={() => setEquation("")}>
         cls
       </span>
     </div>
