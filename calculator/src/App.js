@@ -5,7 +5,7 @@ function App() {
   const [firstNumber, setFirstNumber] = useState("");
   const result = (() => {
     try {
-      return Function(`return ${firstNumber}`)();
+      return eval(firstNumber);
     } catch {
       return "NaN";
     }
