@@ -3,10 +3,10 @@ import "./App.css";
 import { evaluate } from "mathjs";
 
 function App() {
-  const [firstNumber, setEquation] = useState("");
+  const [equation, setEquation] = useState("");
   const result = (() => {
     try {
-      return evaluate(firstNumber);
+      return evaluate(equation);
     } catch {
       return "NaN";
     }
@@ -15,59 +15,45 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <NumbersInput setEquation={setEquation} firstNumber={firstNumber} />
-      <Operation firstNumber={firstNumber} result={result} />
+      <NumbersInput setEquation={setEquation} />
+      <OperationDisplay equation={equation} result={result} />
     </div>
   );
 }
 
 const Header = () => <header>Number calculator by foxiee3</header>;
 
-function NumbersInput({ firstNumber, setEquation }) {
-  function inputChandler(num, settter) {
-    settter((arg) => arg + num);
+function NumbersInput({ setEquation }) {
+  function inputChandler(num) {
+    num === "cls" ? setEquation("") : setEquation((arg) => arg + num);
   }
+  const CalcButton = ({ children }) => (
+    <span className="number" onClick={(e) => inputChandler(children)}>
+      {children}
+    </span>
+  );
   return (
     <div className="numbersArray">
       {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
-        <span
-          className="number"
-          key={num}
-          onClick={(e) => inputChandler(num, setEquation)}
-        >
-          {num}
-        </span>
+        <CalcButton key={num}>{num}</CalcButton>
       ))}
-      <span className="number" onClick={(e) => inputChandler(0, setEquation)}>
-        0
-      </span>
-      <span className="number" onClick={(e) => inputChandler("+", setEquation)}>
-        +
-      </span>
-      <span className="number" onClick={(e) => inputChandler("-", setEquation)}>
-        -
-      </span>
-      <span className="number" onClick={(e) => inputChandler("*", setEquation)}>
-        *
-      </span>
-      <span className="number" onClick={(e) => inputChandler("/", setEquation)}>
-        :
-      </span>
-
-      <span className="number" onClick={() => setEquation("")}>
-        cls
-      </span>
+      <CalcButton>0</CalcButton>
+      <CalcButton>+</CalcButton>
+      <CalcButton>-</CalcButton>
+      <CalcButton>*</CalcButton>
+      <CalcButton>/</CalcButton>
+      <CalcButton>cls</CalcButton>
     </div>
   );
 }
 
-function Operation({ firstNumber, result }) {
+function OperationDisplay({ equation, result }) {
   return (
     <span className="result">
-      {firstNumber ? (
+      {equation ? (
         <>
-          {firstNumber}
-          {Number(firstNumber) !== Number(result) && !isNaN(result) && (
+          {equation}
+          {Number(equation) !== Number(result) && !isNaN(result) && (
             <Result result={result} />
           )}
         </>
@@ -79,9 +65,7 @@ function Operation({ firstNumber, result }) {
 }
 
 function Result({ result }) {
-  return <span className="result">
-   ={result}
-  </span>
+  return <span className="result">={result}</span>;
 }
 
 export default App;
