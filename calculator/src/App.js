@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./App.css";
+import { evaluate } from "mathjs";
 
 function App() {
   const [firstNumber, setFirstNumber] = useState("");
   const result = (() => {
     try {
-      return eval(firstNumber);
+      return evaluate(firstNumber);
     } catch {
       return "NaN";
     }
