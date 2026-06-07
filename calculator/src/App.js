@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { evaluate, number } from "mathjs";
+import { evaluate } from "mathjs";
 
 function App() {
   const [firstNumber, setEquation] = useState("");

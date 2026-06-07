@@ -12,7 +12,7 @@
 
 .numbersArray{
   display: grid;
-  grid-template-columns: 120px 120px 120px;
+  grid-template-columns: 130px 130px 130px;
 }
 
 .number{
