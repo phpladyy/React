@@ -1,0 +1,27 @@
+.App {
+  font-size: 2.5vw;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.numbersInput{
+  display: grid;
+  grid-template-columns: 250px 70px;
+}
+
+.numbersArray{
+  display: grid;
+  grid-template-columns: 70px 70px 70px;
+}
+
+.number{
+  background-color: rgb(218, 143, 45);
+  padding: 15px;
+  margin: 1.3px;
+}
+
+.number:hover{
+  cursor: pointer;
+  background-color: rgb(13, 158, 78);
+}
