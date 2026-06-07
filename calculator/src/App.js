@@ -80,14 +80,14 @@ function Operation({ firstNumber, result }) {
   return (
     <>
       <span>
-        {firstNumber}=<Result result={result} />
+        {firstNumber && firstNumber} {result!=firstNumber && <Result result={result}/>}
       </span>
     </>
   );
 }
 
 function Result({ result }) {
-  return result ? result : "space for number";
+  return `= ${result}`;
 }
 
 export default App;
