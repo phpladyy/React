@@ -1,5 +1,5 @@
 .App {
-  font-size: 2.5vw;
+  font-size: 3.9vw;
   display: grid;
   justify-items: center;
   text-align: center;
@@ -12,12 +12,12 @@
 
 .numbersArray{
   display: grid;
-  grid-template-columns: 70px 70px 70px;
+  grid-template-columns: 120px 120px 120px;
 }
 
 .number{
   background-color: rgb(218, 143, 45);
-  padding: 13px;
+  padding: 25px;
   margin: 1.3px;
 }
 

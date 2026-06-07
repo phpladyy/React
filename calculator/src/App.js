@@ -31,7 +31,8 @@ function NumbersInput({ firstNumber, setEquation }) {
     <div className="numbersArray">
       {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
         <span
-          className="number" key={num}
+          className="number"
+          key={num}
           onClick={(e) => inputChandler(num, setEquation)}
         >
           {num}
@@ -62,12 +63,18 @@ function NumbersInput({ firstNumber, setEquation }) {
 
 function Operation({ firstNumber, result }) {
   return (
-    <>
-      <span>
-        {firstNumber && firstNumber}{" "}
-        {result != firstNumber && !isNaN(result) && <Result result={result} />}
-      </span>
-    </>
+    <span className="result">
+      {firstNumber ? (
+        <>
+          {firstNumber}
+          {Number(firstNumber) !== Number(result) && !isNaN(result) && (
+            <Result result={result} />
+          )}
+        </>
+      ) : (
+        "Your result will be  here"
+      )}
+    </span>
   );
 }
 
