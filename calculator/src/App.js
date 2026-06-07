@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { evaluate } from "mathjs";
+import { evaluate, number } from "mathjs";
 
 function App() {
   const [firstNumber, setEquation] = useState("");
@@ -14,58 +14,42 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <NumbersInput setEquation={setEquation} firstNumber={firstNumber} />
       <Operation firstNumber={firstNumber} result={result} />
     </div>
   );
 }
 
-const Header = () => <header>Number calculator by foxiee3</header>
+const Header = () => <header>Number calculator by foxiee3</header>;
 
 function NumbersInput({ firstNumber, setEquation }) {
   function inputChandler(num, settter) {
     settter((arg) => arg + num);
-    console.log(Number(firstNumber));
   }
   return (
     <div className="numbersArray">
       {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
         <span
-          className="number"
+          className="number" key={num}
           onClick={(e) => inputChandler(num, setEquation)}
         >
           {num}
         </span>
       ))}
-      <span
-        className="number"
-        onClick={(e) => inputChandler(0, setEquation)}
-      >
+      <span className="number" onClick={(e) => inputChandler(0, setEquation)}>
         0
       </span>
-      <span
-        className="number"
-        onClick={(e) => inputChandler("+", setEquation)}
-      >
+      <span className="number" onClick={(e) => inputChandler("+", setEquation)}>
         +
       </span>
-      <span
-        className="number"
-        onClick={(e) => inputChandler("-", setEquation)}
-      >
+      <span className="number" onClick={(e) => inputChandler("-", setEquation)}>
         -
       </span>
-      <span
-        className="number"
-        onClick={(e) => inputChandler("*", setEquation)}
-      >
+      <span className="number" onClick={(e) => inputChandler("*", setEquation)}>
         *
       </span>
-      <span
-        className="number"
-        onClick={(e) => inputChandler("/", setEquation)}
-      >
+      <span className="number" onClick={(e) => inputChandler("/", setEquation)}>
         :
       </span>
 
@@ -80,7 +64,8 @@ function Operation({ firstNumber, result }) {
   return (
     <>
       <span>
-        {firstNumber && firstNumber} {result!=firstNumber && <Result result={result}/>}
+        {firstNumber && firstNumber}{" "}
+        {result != firstNumber && !isNaN(result) && <Result result={result} />}
       </span>
     </>
   );
