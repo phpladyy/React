@@ -79,7 +79,9 @@ function Operation({ firstNumber, result }) {
 }
 
 function Result({ result }) {
-  return `= ${result}`;
+  return <span className="result">
+   ={result}
+  </span>
 }
 
 export default App;

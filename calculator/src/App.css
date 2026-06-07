@@ -25,3 +25,7 @@
   cursor: pointer;
   background-color: rgb(13, 158, 78);
 }
+
+.result{
+  font-size: 6vw;
+}
