@@ -1,5 +1,5 @@
 .App {
-  font-size: 3.9vw;
+  font-size: 3.7vmin;
   display: grid;
   justify-items: center;
   text-align: center;
@@ -11,13 +11,24 @@
 }
 
 .numbersArray{
+  position: relative;
   display: grid;
-  grid-template-columns: 130px 130px 130px;
+  grid-template-columns: 19vmin 19vmin 19vmin;
+}
+.operatorsArray{
+  display: grid;
+   position: relative;
+  grid-template-columns: 17vmin 17vmin;
+}
+
+.calculator{
+   display: grid;
+  grid-template-columns: 65vmin 34vmin;
 }
 
 .number{
   background-color: rgb(218, 143, 45);
-  padding: 25px;
+  padding: 4vmin;
   margin: 1.3px;
 }
 
@@ -27,5 +38,5 @@
 }
 
 .result{
-  font-size: 6vw;
+  font-size: 5vmin;
 }

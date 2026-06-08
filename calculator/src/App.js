@@ -4,18 +4,24 @@ import { evaluate } from "mathjs";
 
 function App() {
   const [equation, setEquation] = useState("");
+  function inputHandler(num) {
+    num === "cls" ? setEquation("") : setEquation((arg) => arg + num);
+  }
   const result = (() => {
     try {
-      return evaluate(equation);
+      return  parseFloat((evaluate(equation)).toFixed(2));
     } catch {
-      return "NaN";
+      return NaN;
     }
   })();
 
   return (
     <div className="App">
       <Header />
-      <NumbersInput setEquation={setEquation} />
+      <div className="calculator">
+        <NumbersInput inputHandler={inputHandler} />
+        <OperatorsInput inputHandler={inputHandler} />
+      </div>
       <OperationDisplay equation={equation} result={result} />
     </div>
   );
@@ -23,30 +29,39 @@ function App() {
 
 const Header = () => <header>Number calculator by foxiee3</header>;
 
-function NumbersInput({ setEquation }) {
-  function inputChandler(num) {
-    num === "cls" ? setEquation("") : setEquation((arg) => arg + num);
-  }
-  const CalcButton = ({ children }) => (
-    <span className="number" onClick={(e) => inputChandler(children)}>
-      {children}
-    </span>
-  );
+const CalcButton = ({ children, inputHandler }) => (
+  <span className="number" onClick={() => inputHandler(children)}>
+    {children}
+  </span>
+);
+
+function NumbersInput({ inputHandler }) {
   return (
     <div className="numbersArray">
       {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
-        <CalcButton key={num}>{num}</CalcButton>
+        <CalcButton key={num} inputHandler={inputHandler}>
+          {num}
+        </CalcButton>
       ))}
-      <CalcButton>0</CalcButton>
-      <CalcButton>+</CalcButton>
-      <CalcButton>-</CalcButton>
-      <CalcButton>*</CalcButton>
-      <CalcButton>/</CalcButton>
-      <CalcButton>cls</CalcButton>
+      <CalcButton inputHandler={inputHandler}>0</CalcButton>
+      <CalcButton inputHandler={inputHandler}>&#40;</CalcButton>
+      <CalcButton inputHandler={inputHandler}>&#41;</CalcButton>
     </div>
   );
 }
 
+function OperatorsInput({ inputHandler }) {
+  const operators = ["+", "-", "*", "/", ".", "cls"];
+  return (
+    <div className="operatorsArray">
+      {operators.map((operator) => (
+        <CalcButton inputHandler={inputHandler} key={operator}>
+          {operator}
+        </CalcButton>
+      ))}
+    </div>
+  );
+}
 function OperationDisplay({ equation, result }) {
   return (
     <span className="result">
