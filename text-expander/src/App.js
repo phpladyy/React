@@ -14,7 +14,7 @@ function App() {
 
       <TextExpander
         expanded={false}
-        collapsedNumWords={75}
+        collapsedNumWords={20}
         expandButtonText="Show text"
         collapseButtonText="Collapse text"
         buttonColor="#ff6622"
@@ -38,34 +38,39 @@ function App() {
 
 function TextExpander({
   children,
-  collapsedNumWords = 46,
+  collapsedNumWords = 10,
   expandButtonText = "Show more",
   collapseButtonText = "Collapse",
   buttonColor = "#0029e0",
   expanded = false,
   className,
 }) {
-  const buttonStyle={
-    color:buttonColor,
-    cursor: 'pointer'
-  }
+  const buttonStyle = {
+    background: 'none',
+    border: 'none',
+    marginLeft: '2px',
+    color: buttonColor,
+    cursor: "pointer",
+  };
 
-  function handleExpandButton(){
+  function handleExpandButton() {
     setIsExpanded((expanded) => !expanded);
   }
 
   const [isExpanded, setIsExpanded] = useState(expanded);
+  const displayedText = isExpanded
+    ? children
+    : children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
+
+  const displayButton = isExpanded
+    ? collapseButtonText
+    : expandButtonText;
   return (
-    <div className="box">
-      <div className={className}>
-        {isExpanded ? children : `${children.slice(0, collapsedNumWords)}...`}
-      <span
-        style={buttonStyle}
-        onClick={handleExpandButton}
-        >
-        {isExpanded ? " " + collapseButtonText : " " + expandButtonText}
-      </span>
-        </div>
+    <div className={className}>
+      {displayedText}
+      <button style={buttonStyle} onClick={handleExpandButton}>
+        {displayButton}
+      </button>
     </div>
   );
 }
