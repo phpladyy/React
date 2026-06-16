@@ -4,7 +4,7 @@ const initialFriends = [
   {
     id: 118836,
     name: "Clark",
-    image: "https://scontent-waw2-2.xx.fbcdn.net/v/t39.30808-1/492348587_122114760230825377_878840766037753750_n.jpg?stp=cp0_dst-jpg_tt6&cstp=mx583x589&ctp=s32x32&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_ohc=IrEt25mOyv4Q7kNvwEZtei6&_nc_oc=AdqqtwYu17yjPGNDzZtCIZT06NdmqRZ0y1MP2cKgeNk_x4J3EU6ChIrQF_FUnrutdZY&_nc_zt=24&_nc_ht=scontent-waw2-2.xx&_nc_gid=htDVc_N6SnckuyG9sPVhFQ&_nc_ss=7a289&oh=00_Af-N0PuGuFPnQVfIBOUZ4xQrG6APj5a6YVRHIHnVMKvUIQ&oe=6A2A09D7",
+    image: "https://i.pravatar.cc/48?u=2147",
     balance: -7,
   },
   {
@@ -42,19 +42,18 @@ export default function App() {
   }
 
   function handleSplit(value) {
-      setFriends((friends) =>
-        friends.map((friend) =>
-          friend.id === selectedFriend.id
-            ? { ...friend, balance: friend.balance + value }
-            : friend,
-        ),
-      )
-      setSelectedFriend(null);
+    setFriends((friends) =>
+      friends.map((friend) =>
+        friend.id === selectedFriend.id
+          ? { ...friend, balance: friend.balance + value }
+          : friend,
+      ),
+    );
+    setSelectedFriend(null);
   }
 
   return (
     <div className="app">
-      <h1>Bill splitting app by Foxiee3</h1>
       <div className="sidebar">
         <FriendsList
           onSelection={handleSelection}
@@ -70,17 +69,14 @@ export default function App() {
       </div>
       {selectedFriend && (
         <FormSplitingBill
+          key={selectedFriend.id}
           onSplit={handleSplit}
-          friends={friends}
           selectedFriend={selectedFriend}
         />
       )}
     </div>
   );
 }
-
-const Header = () => <h1>He</h1>
-
 
 function FriendsList({ friends, onSelection, selectedFriend }) {
   return (
