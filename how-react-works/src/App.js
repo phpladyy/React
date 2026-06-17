@@ -26,7 +26,7 @@ export default function App() {
   );
 }
 
-console.log(<DifferentContent/>)
+console.log(<DifferentContent />);
 
 function Tabbed({ content }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -41,12 +41,13 @@ function Tabbed({ content }) {
       </div>
 
       {activeTab <= 2 ? (
-        <TabContent item={content.at(activeTab)} />
+        <TabContent
+          key={content.at(activeTab).summary}
+          item={content.at(activeTab)}
+        />
       ) : (
-        <DifferentContent test={23}/>
+        <DifferentContent />
       )}
-      other unsafe way of rendering react elements:
-      {TabContent({item: content.at(1)})}
     </div>
   );
 }
@@ -66,10 +67,25 @@ function TabContent({ item }) {
   const [showDetails, setShowDetails] = useState(true);
   const [likes, setLikes] = useState(0);
 
+  console.log("Render");
+
   function handleInc() {
-    setLikes(likes + 1);
+    setLikes((likes) => likes + 1);
+  }
+  function handleMultiInc() {
+    handleInc();
+    handleInc();
+    handleInc();
   }
 
+  function handleUndo() {
+    setShowDetails(true);
+    setLikes(0);
+    console.log(likes);
+  }
+  function handleUndoLater() {
+    setTimeout(handleUndo, 2000);
+  }
   return (
     <div className="tab-content">
       <h4>{item.summary}</h4>
@@ -83,13 +99,13 @@ function TabContent({ item }) {
         <div className="hearts-counter">
           <span>{likes} ❤️</span>
           <button onClick={handleInc}>+</button>
-          <button>+++</button>
+          <button onClick={handleMultiInc}>+++</button>
         </div>
       </div>
 
       <div className="tab-undo">
-        <button>Undo</button>
-        <button>Undo in 2s</button>
+        <button onClick={handleUndo}>Undo</button>
+        <button onClick={handleUndoLater}>Undo in 2s</button>
       </div>
     </div>
   );
