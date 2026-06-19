@@ -19,12 +19,12 @@ const faqs = [
 export default function App() {
   return (
     <div>
-      <Accordion />
+      <Accordion/>
     </div>
   );
 }
 
-function Accordion() {
+function Accordion({children}) {
   const [curOpenItem, setCurOpen] = useState(null);
 
   return (
@@ -36,17 +36,22 @@ function Accordion() {
           key={question.title}
           curIndex={curIndex}
           title={question.title}
-          text={question.text}
-        />
+        >{question.text}</Element>
       ))}
+         <Element
+          onOpen={setCurOpen}
+          curOpenItem={curOpenItem}
+          curIndex={23}
+          title={'Test'}
+        >{'React web dev'}</Element>
     </div>
   );
 }
 
-function Element({ curOpenItem, onOpen, title, text, curIndex }) {
+function Element({ curOpenItem, onOpen, title, curIndex, children }) {
   const isOpen = curOpenItem === curIndex;
   function handleOpen() {
-    curOpenItem !== curIndex ? onOpen(curIndex) : onOpen(null);
+    onOpen(isOpen ? null: curIndex)
   }
 
   return (
@@ -57,7 +62,7 @@ function Element({ curOpenItem, onOpen, title, text, curIndex }) {
       </p>
       <p className="title">{title}</p>
       <p className="icon">{isOpen ? "-" : "+"}</p>
-      {isOpen && <div className="content-box">{text}</div>}
+      {isOpen && <div className="content-box">{children}</div>}
     </div>
   );
 }

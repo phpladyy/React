@@ -12,18 +12,15 @@ export default function App() {
 
 function Steps() {
   const [step, setStep] = useState(1);
-  const [test, setTest] = useState({ text: "Click next to see more pages" });
   const [isclosed, setClosing] = useState(false);
 
   const handlePreviousClick = () => {
     if (step > 1) {
       setStep((s) => s - 1);
-      setTest({ text: "You went to previous page" });
     }
   };
   const handleNextClick = () => {
     step < 3 && setStep((s) => s + 1);
-    setTest({ text: "You are on next page" });
   };
 
   return (
@@ -38,12 +35,9 @@ function Steps() {
             <div className={step === 2 ? "active" : "non-active"}>2</div>
             <div className={step === 3 ? "active" : "non-active"}>3</div>
           </div>
-
-          <p className="message">
-            Step {step}: {messages[step - 1]}
-            <br />
-            {test.text}
-          </p>
+          <Message step={step}>
+            {messages[step-1]}
+          </Message>
 
           <div className="buttons">
             <Button
@@ -60,6 +54,17 @@ function Steps() {
         </div>
       )}
     </>
+  );
+}
+
+function Message({ step, children }) {
+  return (
+    <div className="message">
+      <h3>
+        Step {step}
+      </h3>
+      {children}
+    </div>
   );
 }
 

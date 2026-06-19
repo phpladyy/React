@@ -21,11 +21,11 @@ const ActionButton = ({ children, onClick }) => (
   </button>
 );
 
+
 export default function App() {
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [friends, setFriends] = useState(initialFriends);
   const [showAddingFriendForm, setShowAddingFriendForm] = useState(false);
-
   const handleShowAddFriendForm = () =>
     setShowAddingFriendForm((show) => !show);
 
