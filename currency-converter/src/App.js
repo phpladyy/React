@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 
 import { CurrencySelect } from "./CurrencySelect";
+import { Header } from "./Header";
 
 function App() {
   return (
     <div className="app">
-      <Header/>
+      <Header />
       <Inputs />
     </div>
   );
-}
-
-function Header(){
-  return <h4>Foxie's Exchange</h4>
 }
 
 function Inputs() {
@@ -57,7 +54,7 @@ function Inputs() {
   return (
     <div className="inputs">
       <input
-      className="inputMoneyField"
+        className="inputMoneyField"
         type="number"
         placeholder="Enter amount here..."
         value={moneyAmountInput}
