@@ -4,12 +4,16 @@ import Main from "./Main";
 import Loader from "./Loader";
 import Error from "./Error";
 import StartScreen from "./StartScreen";
+import Question from "./Question";
 
 export default function App() {
   const initialState = {
     questions: [],
     // finished, loading, error, ready, active
     status: "loading",
+    index: 0,
+    answer: null,
+    points: 0,
   };
   function reducer(state, action) {
     switch (action.type) {
@@ -24,11 +28,28 @@ export default function App() {
           ...state,
           status: "error",
         };
+      case "start":
+        console.log("start");
+        return { ...state, status: "active" };
+      case "newAnswer":
+        const question = state.questions.at(state.index);
+        return {
+          ...state,
+          answer: action.payload,
+          points:
+            action.payload === question.correctOption
+              ? state.points + question.points
+              : state.points,
+        };
+
       default:
         throw new Error("Action unkown");
     }
   }
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index, answer }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
 
   const numQuestions = questions.length;
 
@@ -37,7 +58,7 @@ export default function App() {
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
-  });
+  }, []);
 
   return (
     <div className="app">
@@ -45,7 +66,16 @@ export default function App() {
       <Main>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StartScreen numQuestions={numQuestions}/>}
+        {status === "ready" && (
+          <StartScreen dispatch={dispatch} numQuestions={numQuestions} />
+        )}
+        {status === "active" && (
+          <Question
+            question={questions[index]}
+            dispatch={dispatch}
+            answer={answer}
+          />
+        )}
       </Main>
     </div>
   );
