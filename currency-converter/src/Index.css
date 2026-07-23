@@ -21,13 +21,13 @@ body,
 }
 select,
 input {color: rgb(5, 41, 19);
-  margin: 0.2vmin;
+  margin: 0.5vmin;
   border: 2px solid #e9a374;
   border-radius: 10px;
   background-color: #ce520a;
   text-align: center;
   font-size: 6vmin;
-  width: 70%;
+  width: 60%;
   padding: 15px;
   box-sizing: border-box;
 }
