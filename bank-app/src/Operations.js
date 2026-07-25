@@ -29,7 +29,7 @@ function Operations({ isAccOpened, dispatch }) {
       </button>
       <button
         disabled={!isAccOpened}
-        onClick={() => dispatch({ type: "loan" })}
+        onClick={() => dispatch({ type: "loan", payload: 5000})}
       >
         Request a loan of 5000
       </button>

@@ -5,5 +5,11 @@
   align-items: center;
 }
 button{
+  font-size: 25px;
   margin: 0.3rem;
+}
+body{
+  background-color: black;
+ font-size: 35px;
+  color: white;
 }
