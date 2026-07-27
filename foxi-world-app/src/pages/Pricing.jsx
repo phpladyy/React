@@ -1,14 +1,26 @@
-import PageNav from "../components/PageNav"
+// Uses the same styles as Product
+import PageNav from "../components/PageNav";
+import styles from "./Product.module.css";
 
-function Pricing() {
-    return (
+export default function Product() {
+  return (
+    <main className={styles.product}>
+      <PageNav />
+      <section>
         <div>
-            <PageNav/>
-            <h1>
-                Pricing
-                </h1>
+          <h2>
+            Simple pricing.
+            <br />
+            Just $9/month.
+          </h2>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae vel
+            labore mollitia iusto. Recusandae quos provident, laboriosam fugit
+            voluptatem iste.
+          </p>
         </div>
-    )
+        <img src="img-2.png" alt="user satisfaction image" />
+      </section>
+    </main>
+  );
 }
-
-export default Pricing

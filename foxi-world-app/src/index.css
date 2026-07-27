@@ -26,6 +26,7 @@ html {
 }
 
 body {
+  background-color: var(--color-dark--0);
   font-family: "Manrope", sans-serif;
   color: var(--color-light--2);
   font-weight: 400;
