@@ -6,12 +6,17 @@
 }
 
 .product section {
-  width: clamp(80rem, 80%, 90rem);
+  width: min(80%, 90rem);
   margin: 6rem auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 7rem;
   align-items: center;
+}
+@media (max-width: 750px) {
+  .product section {
+    grid-template-columns: 1fr;
+  }
 }
 
 .product img {
